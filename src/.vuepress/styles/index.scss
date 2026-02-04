@@ -1,5 +1,90 @@
 // place your custom styles here
 
+// ----------------------------------------------------------------
+// Modern UI Overrides
+// ----------------------------------------------------------------
+
+// 1. Typography & Global
+:root {
+  --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-code: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  
+  // Custom glass variables
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--theme-color);
+  color: white;
+}
+
+html[data-theme="dark"] {
+  --glass-bg: rgba(17, 24, 39, 0.7); // Darker glass for dark mode
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body {
+  font-family: var(--font-family-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 2. Navbar Glassmorphism
+.vp-navbar {
+  background-color: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: var(--glass-border) !important;
+  
+  // Make shadow more subtle
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+// 3. Sidebar Glassmorphism (Optional, but looks nice)
+.vp-sidebar {
+  background-color: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-right: var(--glass-border) !important;
+}
+
+// 4. Modern Scrollbars
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.5);
+}
+
+// 5. Code Blocks
+div[class*="language-"] {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+// ----------------------------------------------------------------
+// Layout Fixes (Preserved)
+// ----------------------------------------------------------------
+
 // Fix for custom home page layout - make it full width
 // Use :has() selector since pageClass doesn't apply custom-home class properly
 .vp-page:has(.home-page) {
