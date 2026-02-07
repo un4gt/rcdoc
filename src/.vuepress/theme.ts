@@ -12,7 +12,7 @@ export default hopeTheme({
   },
 
   logo: "/logo.webp",
-
+  repo:"1198722360/rcdoc",
   docsDir: "src/docs",
 
   // 导航栏
