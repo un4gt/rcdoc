@@ -78,5 +78,17 @@ export default sidebar({
                 }
             ],
         },
+        {
+            text: "常见问题",
+            icon: "streamline-freehand-color:plugin-jigsaw-puzzle",
+            prefix: "rc_questions/",
+            children: [
+                {
+                    text: "Codex",
+                    icon: "hugeicons:chat-gpt",
+                    link: "codex.md",
+                }
+            ],
+        },
     ],
 });
