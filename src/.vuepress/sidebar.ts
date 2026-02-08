@@ -13,8 +13,13 @@ export default sidebar({
                     link: "intro.md",
                 },
                 {
-                    text: "充值与Apikey生成",
+                    text: "充值与套餐",
                     icon: "fluent-mdl2:money",
+                    link: "recharge.md",
+                },
+                {
+                    text: "ApiKey 管理",
+                    icon: "mdi:key",
                     link: "apikey.md",
                 },
                 {

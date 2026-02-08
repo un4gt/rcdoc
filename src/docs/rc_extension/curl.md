@@ -67,6 +67,8 @@ curl https://www.right.codes/codex/v1/chat/completions \
 
 ::: info
 /v1/chat/completions的响应由/v1/responses的响应转化而来，部分软件/插件可能存在兼容性问题；请求体中的system prompt会被自动替换为codex的默认instructions而无效
+
+提醒：`/v1/chat/completions`（completions接口）不支持缓存。
 :::
 
 ### Claude

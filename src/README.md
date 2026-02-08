@@ -44,7 +44,7 @@ footer: Copyright © 2026-present Right Code
       </div>
       <div class="hero-stats glass-panel">
         <div class="stat-item">
-          <span class="stat-number">4+</span>
+          <span class="stat-number">3+</span>
           <span class="stat-label">AI Agent 支持</span>
         </div>
         <div class="divider"></div>
@@ -89,13 +89,6 @@ footer: Copyright © 2026-present Right Code
         </div>
         <h3 class="feature-title">Gemini CLI</h3>
         <p class="feature-description">Google Gemini 系列模型支持，强大的多模态处理能力，更快的响应速度。</p>
-      </div>
-      <div class="feature-card glass-card">
-        <div class="feature-icon-wrapper">
-          <iconify-icon icon="ri:grok-ai-fill" width="32" height="32"></iconify-icon>
-        </div>
-        <h3 class="feature-title">Grok Code</h3>
-        <p class="feature-description">xAI Grok 模型接入，实时联网能力，获取最新信息，保持代码前沿。</p>
       </div>
       <div class="feature-card glass-card">
         <div class="feature-icon-wrapper">

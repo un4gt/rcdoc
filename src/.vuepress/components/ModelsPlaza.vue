@@ -1,5 +1,12 @@
 <template>
   <div class="models-plaza">
+    <transition name="copy-toast-fade">
+      <div v-if="toastVisible" class="copy-toast" :class="toastType">
+        <iconify-icon :icon="toastType === 'success' ? 'mdi:check-circle' : 'mdi:alert-circle'" width="18" height="18"></iconify-icon>
+        <span>{{ toastMessage }}</span>
+      </div>
+    </transition>
+
     <div class="loading-state" v-if="loading">
       <div class="loading-spinner"></div>
       <span>加载模型列表中...</span>
@@ -75,11 +82,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const loading = ref(true);
 const error = ref(null);
 const upstreams = ref([]);
+const toastVisible = ref(false);
+const toastMessage = ref('');
+const toastType = ref('success');
+let toastTimer = null;
 
 // 开发环境使用代理，生产环境使用完整 URL
 const BASE_URL = import.meta.env.DEV ? '/rc-api' : 'https://right.codes';
@@ -99,31 +110,54 @@ const fetchModels = async () => {
   }
 };
 
+const showCopyToast = (message, type = 'success') => {
+  toastMessage.value = message;
+  toastType.value = type;
+  toastVisible.value = true;
+
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toastVisible.value = false;
+  }, 1600);
+};
+
 const copyBaseUrl = async (prefix, event) => {
   const url = 'https://right.codes' + prefix;
+  const triggerEl = event.currentTarget;
   try {
     await navigator.clipboard.writeText(url);
-    const el = event.currentTarget;
-    el.classList.add('copied');
-    setTimeout(() => el.classList.remove('copied'), 1500);
+    showCopyToast('BaseUrl 已复制');
+    if (triggerEl) {
+      triggerEl.classList.add('copied');
+      setTimeout(() => triggerEl.classList.remove('copied'), 1500);
+    }
   } catch (err) {
+    showCopyToast('复制失败，请手动复制', 'error');
     console.error('复制失败:', err);
   }
 };
 
 const copyModelName = async (name, event) => {
+  const triggerEl = event.currentTarget;
   try {
     await navigator.clipboard.writeText(name);
-    const el = event.currentTarget;
-    el.classList.add('copied');
-    setTimeout(() => el.classList.remove('copied'), 1500);
+    showCopyToast('模型名称已复制');
+    if (triggerEl) {
+      triggerEl.classList.add('copied');
+      setTimeout(() => triggerEl.classList.remove('copied'), 1500);
+    }
   } catch (err) {
+    showCopyToast('复制失败，请手动复制', 'error');
     console.error('复制失败:', err);
   }
 };
 
 onMounted(() => {
   fetchModels();
+});
+
+onUnmounted(() => {
+  if (toastTimer) clearTimeout(toastTimer);
 });
 </script>
 
@@ -138,6 +172,42 @@ onMounted(() => {
   --rc-accent-border-soft: rgba(224, 107, 49, 0.18);
   --rc-accent-border: rgba(224, 107, 49, 0.25);
   --rc-accent-gradient: linear-gradient(135deg, rgba(224, 107, 49, 0.08) 0%, rgba(240, 122, 63, 0.05) 100%);
+}
+
+.copy-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.copy-toast.success {
+  background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+  color: #fff;
+}
+
+.copy-toast.error {
+  background: linear-gradient(135deg, #ef5350 0%, #e53935 100%);
+  color: #fff;
+}
+
+.copy-toast-fade-enter-active,
+.copy-toast-fade-leave-active {
+  transition: all 0.2s ease;
+}
+
+.copy-toast-fade-enter-from,
+.copy-toast-fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 /* 加载状态 */
