@@ -7,6 +7,33 @@ footer: false
 
 ## 如何在Codex中使用最新模型
 
+:::tip 通用启用方式（推荐）
+- 打开 `config.toml`，找到这一行：`model = "gpt-5.2"`。
+- 把它改成你想启用的模型（例如：`model = "gpt-5.3-codex"`），然后保存。
+- 保存后重启你正在用的客户端即可生效：`Codex CLI` / `Codex App` / `VSCode` 插件。
+- **重要：启用后不要在会话里切换模型。** 如果切换过，请重新执行：`codex -m gpt-5.3-codex -c model_reasoning_effort="xhigh"`。
+:::
+
+### CLI 使用方法
+
+1. 打开终端，使用下面命令启动 Codex：
+
+```bash
+codex -m gpt-5.3-codex -c model_reasoning_effort="xhigh"
+```
+
+2. 进入对话后，直接提问即可使用最新模型。
+
+::: tip
+如果你当前已经打开了 `codex`，先按 `Ctrl + C` 退出，再用上面的命令重新启动。
+:::
+
+### VSCode 版本使用方法
+
+:::warning 版本提示
+插件教程仅适用于当前支持的 Codex 插件版本 `v0.5.72`。
+:::
+
 1. 首先打开你的Vscode，查看你的VScode插件版本号
 ::: important
 **这里一定要把插件换成预发布版本**

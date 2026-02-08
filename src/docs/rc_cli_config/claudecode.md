@@ -6,7 +6,7 @@ footer: false
 ---
 
 :::tip
-**强烈建议使用CC-Switch来进行配置，小白友好！**
+**强烈建议使用 [CC-Switch](/docs/rc_cli_config/ccs.html) 来进行配置，小白友好！（点击跳转）**
 :::
 
 1. 找到Claude Code的配置文件夹
