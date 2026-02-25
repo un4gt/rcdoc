@@ -11,6 +11,42 @@ footer: false
 
 ![](/assets/image/rc_extension/opencode/rc-01.webp)
 
+或者使用 bash/powershell 脚本
+
+:::tabs
+@tab Linux/MacOS
+bash 脚本
+```bash
+mkdir -p ~/.config/opencode && \
+wget -O /tmp/rc.zip https://docs.right.codes/assets/file/opencode/QuickConfiguration.zip && \
+unzip /tmp/rc.zip -d ~/.config/opencode && \
+rm /tmp/rc.zip
+```
+
+@tab Windows
+```powershell
+mkdir -p "$HOME\.config\opencode" `
+; iwr "https://docs.right.codes/assets/file/opencode/QuickConfiguration.zip" -OutFile "$env:TEMP\rc.zip" `
+; Expand-Archive "$env:TEMP\rc.zip" "$HOME\.config\opencode" -Force `
+; rm "$env:TEMP\rc.zip"
+```
+:::
+
+
+或者使用 `uv` 一键配置脚本（推荐）
+
+```bash
+uv run https://docs.right.codes/assets/file/opencode/rc_opencode_setup.py
+```
+
+> 提示：`uvx` 主要用于运行 Python 工具包（等价 `uv tool run`），不适合直接运行远程 `.py`；运行脚本请使用 `uv run`。
+>
+> 脚本会自动：检测 `opencode` 是否安装 → 下载并解压模板 → 提示输入 API Key → 拉取 Claude/Codex/Gemini 模型列表（空格勾选）并写入 `opencode.json`。
+>
+> 默认仅写入 API Key，不会改动模板里的 `baseURL`；如需强制覆盖可加 `--overwrite-base-url`。
+>
+> 运行结束后可直接跳到第 5 步（`opencode` → `/models`）。
+
 2. 打开 `opencode.json` 文件，分别在 `Gemini`、`Claude`、`GPT` 部分配置相应的 API Key，并保存
 
 ::: important
